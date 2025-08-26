@@ -3,227 +3,357 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Value Hugger – Nachhaltige WWWaschmaschinen</title>
+  <title>Value Hugger – Nachhaltige Waschmaschinen</title>
   <style>
     :root {
       --primary: #1d4f7a;
       --secondary: #4caf50;
       --light: #f5f5f5;
       --dark: #222;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #ef4444;
     }
+
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: var(--light);
       color: var(--dark);
+      line-height: 1.45;
     }
 
-    header {
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 5%;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    /* Top header like Otto: logo, search, actions */
+    .topbar {
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 50;
     }
-
-    header img {
-      height: 50px;
+    .topbar-inner {
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 16px;
+      align-items: center;
+      padding: 12px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
     }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand img { height: 46px; }
+    .brand-name { font-weight: 800; color: var(--primary); letter-spacing: 0.3px; }
 
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
+    .search {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .search input[type="search"]{
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+    .search button{
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .actions{
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .icon-btn{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: var(--primary);
       font-weight: 600;
     }
-    nav a:hover { color: var(--secondary); }
 
-    .hero {
-      text-align: center;
-      padding: 60px 10%;
-      background: linear-gradient(to right, #1d4f7a, #4caf50);
-      color: white;
+    /* Category bar */
+    .catbar{
+      background: #fff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    .hero h1 { font-size: 2.5em; margin-bottom: 15px; }
-    .hero p { font-size: 1.2em; }
+    .catbar-inner{
+      display: flex;
+      gap: 18px;
+      padding: 10px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .catbar a{
+      color: var(--dark);
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+    .catbar a:hover{ background: #f3f4f6; }
 
-    .section {
-      padding: 50px 10%;
-    }
-    .section h2 {
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 30px;
-    }
-
-    .grid {
+    /* Layout */
+    .layout{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px 5%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
     }
 
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      overflow: hidden;
-      transition: transform 0.2s;
+    aside.filters{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      height: fit-content;
     }
-    .card:hover { transform: translateY(-5px); }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
+    .filter-group{
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
     }
-    .card-content {
-      padding: 15px;
+    .filter-group:last-child{ border-bottom: none; }
+    .filter-title{
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: var(--primary);
     }
-    .price {
-      font-weight: bold;
-      font-size: 1.2em;
-      color: var(--secondary);
-      margin: 10px 0;
-    }
-    button {
-      background: var(--primary);
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
+    .filter-options label{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 14px;
       cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background: var(--secondary);
     }
 
-    footer {
+    /* Product grid */
+    .content{
+      min-height: 60vh;
+    }
+    .heading-row{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .heading-row h1{ font-size: 22px; margin: 0; }
+    .sort{
+      display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 14px;
+    }
+    .sort select{ padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; }
+
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .15s ease;
+    }
+    .card:hover{ transform: translateY(-3px); }
+    .card img{ width: 100%; height: 180px; object-fit: cover; }
+    .badge-row{ display:flex; gap:6px; padding:10px 12px 0; }
+    .badge{ background:#e0f2f1; color:#065f46; font-weight:700; font-size:12px; padding:4px 8px; border-radius:999px; }
+    .card-content{ padding: 10px 12px 14px; display:flex; flex-direction:column; gap:6px; }
+    .price{ font-weight: 800; color: var(--secondary); font-size: 18px; }
+    .sub{ color: var(--muted); font-size: 13px; }
+    .stars{ color: #f59e0b; font-size: 14px; }
+    .cta{ margin-top: 6px; }
+    .cta button{ width: 100%; background: var(--primary); color:#fff; border: none; border-radius: 10px; padding: 10px 12px; font-weight: 800; cursor: pointer; }
+    .cta button:hover{ background: var(--secondary); }
+
+    /* Footer */
+    footer{
       background: var(--primary);
-      color: white;
+      color: #fff;
       text-align: center;
-      padding: 30px 10%;
-      margin-top: 40px;
+      padding: 30px 5%;
+      margin-top: 30px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .topbar-inner{ grid-template-columns: 140px 1fr 200px; }
+      .layout{ grid-template-columns: 1fr; }
+      aside.filters{ order: 2; }
+      .content{ order: 1; }
+    }
+    @media (max-width: 640px){
+      .topbar-inner{ grid-template-columns: 1fr; gap: 10px; }
+      .actions{ justify-content: stretch; }
+      .icon-btn{ flex: 1; justify-content: center; }
+      .catbar-inner{ gap: 10px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <img src="value-hugger-logob-01-01.jpg" alt="Value Hugger Logo">
-    <nav>
-      <a href="#shop">Waschmaschinen</a>
-      <a href="#teile">Ersatzteile</a>
-      <a href="#service">Kundenservice</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Value Hugger – Nachhaltigkeit trifft Technik</h1>
-    <p>Generalüberholte Waschmaschinen · Wertvolle Ersatzteile · Kundenservice mit Vertrauen</p>
+  <!-- Top header -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="value-hugger-logob-01-01.jpg" alt="Value Hugger Logo">
+        <div class="brand-name">Value Hugger</div>
+      </div>
+      <form class="search" role="search" aria-label="Produktsuche">
+        <input type="search" placeholder="Suche nach Waschmaschinen, Ersatzteilen..." aria-label="Suche">
+        <button type="submit">Suchen</button>
+      </form>
+      <div class="actions">
+        <button class="icon-btn" aria-label="Mein Konto">Konto</button>
+        <button class="icon-btn" aria-label="Merkliste">Merken</button>
+        <button class="icon-btn" aria-label="Warenkorb">Warenkorb</button>
+      </div>
+    </div>
   </div>
 
-  <!-- PRODUKTE -->
-  <section id="shop" class="section">
-    <h2>Unsere Waschmaschinen</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://via.placeholder.com/400x300.png?text=Bosch+EcoLine" alt="Bosch EcoLine">
-        <div class="card-content">
-          <h3>Bosch EcoLine A+</h3>
-          <p>Generalüberholt · 12 Monate Garantie</p>
-          <p class="price">349 €</p>
-          <button>In den Warenkorb</button>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x300.png?text=Siemens+GreenWash" alt="Siemens GreenWash">
-        <div class="card-content">
-          <h3>Siemens GreenWash</h3>
-          <p>Generalüberholt · Energieeffizienzklasse A</p>
-          <p class="price">399 €</p>
-          <button>In den Warenkorb</button>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x300.png?text=Miele+ClassicCare" alt="Miele ClassicCare">
-        <div class="card-content">
-          <h3>Miele ClassicCare</h3>
-          <p>Geprüft & langlebig</p>
-          <p class="price">449 €</p>
-          <button>In den Warenkorb</button>
-        </div>
-      </div>
+  <!-- Category bar -->
+  <nav class="catbar" aria-label="Kategorien">
+    <div class="catbar-inner">
+      <a href="#">Waschmaschinen</a>
+      <a href="#">Trockner</a>
+      <a href="#">Ersatzteile</a>
+      <a href="#">Zubehör</a>
+      <a href="#">Nachhaltigkeit</a>
+      <a href="#">Service</a>
+      <a href="#kontakt">Kontakt</a>
     </div>
-  </section>
+  </nav>
 
-  <!-- ERSATZTEILE -->
-  <section id="teile" class="section">
-    <h2>Ersatzteile (Keine Verschleißprodukte)</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://via.placeholder.com/400x300.png?text=Bosch+Elektronikmodul" alt="Elektronikmodul">
-        <div class="card-content">
-          <h3>Elektronikmodul Bosch</h3>
-          <p>Komplett geprüft auf Funktionalität</p>
-          <p class="price">89 €</p>
-          <button>In den Warenkorb</button>
+  <!-- Main layout -->
+  <main class="layout">
+    <aside class="filters" aria-label="Filter">
+      <div class="filter-group">
+        <div class="filter-title">Marke</div>
+        <div class="filter-options">
+          <label><input type="checkbox"> Bosch</label>
+          <label><input type="checkbox"> Siemens</label>
+          <label><input type="checkbox"> Miele</label>
+          <label><input type="checkbox"> AEG</label>
         </div>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x300.png?text=Siemens+Bedieneinheit" alt="Bedieneinheit">
-        <div class="card-content">
-          <h3>Bedieneinheit Siemens</h3>
-          <p>Generalüberholte Steuerung</p>
-          <p class="price">99 €</p>
-          <button>In den Warenkorb</button>
+      <div class="filter-group">
+        <div class="filter-title">Energieeffizienz</div>
+        <div class="filter-options">
+          <label><input type="checkbox"> A</label>
+          <label><input type="checkbox"> B</label>
+          <label><input type="checkbox"> C</label>
         </div>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x300.png?text=Miele+Trommelkreuz" alt="Trommelkreuz">
-        <div class="card-content">
-          <h3>Miele Trommelkreuz</h3>
-          <p>Geprüft & aufbereitet – lange Lebensdauer</p>
-          <p class="price">129 €</p>
-          <button>In den Warenkorb</button>
+      <div class="filter-group">
+        <div class="filter-title">Preis</div>
+        <div class="filter-options">
+          <label><input type="checkbox"> bis 300 €</label>
+          <label><input type="checkbox"> 300–500 €</label>
+          <label><input type="checkbox"> über 500 €</label>
         </div>
       </div>
-    </div>
-  </section>
+    </aside>
 
-  <!-- SERVICE -->
-  <section id="service" class="section">
-    <h2>Kundenservice</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="card-content">
-          <h3>Reparatur-Service</h3>
-          <p>Kostengünstige Vor-Ort und Werkstatt-Reparaturen, um Ihre Geräte zu erhalten.</p>
+    <section class="content">
+      <div class="heading-row">
+        <h1>Waschmaschinen</h1>
+        <div class="sort">
+          <span>Sortieren nach</span>
+          <select aria-label="Sortierung">
+            <option>Beliebtheit</option>
+            <option>Preis: aufsteigend</option>
+            <option>Preis: absteigend</option>
+            <option>Bewertung</option>
+          </select>
         </div>
       </div>
-      <div class="card">
-        <div class="card-content">
-          <h3>Garantieverlängerung</h3>
-          <p>Bis zu 24 Monate zusätzliche Sicherheit für Ihre Maschine.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <h3>Beratung & Hotline</h3>
-          <p>Persönliche Expertenberatung bei Auswahl und Ersatzteilen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- KONTAKT -->
+      <div class="grid">
+        <article class="card">
+          <img src="https://via.placeholder.com/600x400.png?text=Bosch+EcoLine" alt="Bosch EcoLine">
+          <div class="badge-row">
+            <span class="badge">Generalüberholt</span>
+            <span class="badge">12M Garantie</span>
+          </div>
+          <div class="card-content">
+            <h3>Bosch EcoLine A+</h3>
+            <div class="stars">★★★★☆ (124)</div>
+            <div class="sub">Energieeffizienzklasse A | 8 kg</div>
+            <div class="price">349 €</div>
+            <div class="cta"><button>In den Warenkorb</button></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://via.placeholder.com/600x400.png?text=Siemens+GreenWash" alt="Siemens GreenWash">
+          <div class="badge-row">
+            <span class="badge">Top Bewertung</span>
+          </div>
+          <div class="card-content">
+            <h3>Siemens GreenWash</h3>
+            <div class="stars">★★★★★ (82)</div>
+            <div class="sub">A | 9 kg | leise</div>
+            <div class="price">399 €</div>
+            <div class="cta"><button>In den Warenkorb</button></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://via.placeholder.com/600x400.png?text=Miele+ClassicCare" alt="Miele ClassicCare">
+          <div class="badge-row">
+            <span class="badge">Langlebig</span>
+          </div>
+          <div class="card-content">
+            <h3>Miele ClassicCare</h3>
+            <div class="stars">★★★★☆ (53)</div>
+            <div class="sub">B | 7 kg | Aufbereitet</div>
+            <div class="price">449 €</div>
+            <div class="cta"><button>In den Warenkorb</button></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://via.placeholder.com/600x400.png?text=AEG+ProEco" alt="AEG ProEco">
+          <div class="badge-row">
+            <span class="badge">Nachhaltig</span>
+          </div>
+          <div class="card-content">
+            <h3>AEG ProEco</h3>
+            <div class="stars">★★★☆☆ (21)</div>
+            <div class="sub">A | 8 kg | Wassersparend</div>
+            <div class="price">329 €</div>
+            <div class="cta"><button>In den Warenkorb</button></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
   <footer id="kontakt">
     <h3>Kontakt</h3>
     <p>Email: kontakt@valuehugger.de | Tel: 01234 / 567890</p>
