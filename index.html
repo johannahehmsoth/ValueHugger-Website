@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Value Hugger – Nachhaltige Waschmaschinen</title>
+  <style>
+    :root {
+      --primary: #1d4f7a;
+      --secondary: #4caf50;
+      --light: #f5f5f5;
+      --dark: #222;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+    }
+
+    header {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 5%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    nav a:hover { color: var(--secondary); }
+
+    .hero {
+      text-align: center;
+      padding: 60px 10%;
+      background: linear-gradient(to right, #1d4f7a, #4caf50);
+      color: white;
+    }
+    .hero h1 { font-size: 2.5em; margin-bottom: 15px; }
+    .hero p { font-size: 1.2em; }
+
+    .section {
+      padding: 50px 10%;
+    }
+    .section h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .price {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--secondary);
+      margin: 10px 0;
+    }
+    button {
+      background: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: var(--secondary);
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 10%;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="value-hugger-logob-01-01.jpg" alt="Value Hugger Logo">
+    <nav>
+      <a href="#shop">Waschmaschinen</a>
+      <a href="#teile">Ersatzteile</a>
+      <a href="#service">Kundenservice</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Value Hugger – Nachhaltigkeit trifft Technik</h1>
+    <p>Generalüberholte Waschmaschinen · Wertvolle Ersatzteile · Kundenservice mit Vertrauen</p>
+  </div>
+
+  <!-- PRODUKTE -->
+  <section id="shop" class="section">
+    <h2>Unsere Waschmaschinen</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300.png?text=Bosch+EcoLine" alt="Bosch EcoLine">
+        <div class="card-content">
+          <h3>Bosch EcoLine A+</h3>
+          <p>Generalüberholt · 12 Monate Garantie</p>
+          <p class="price">349 €</p>
+          <button>In den Warenkorb</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300.png?text=Siemens+GreenWash" alt="Siemens GreenWash">
+        <div class="card-content">
+          <h3>Siemens GreenWash</h3>
+          <p>Generalüberholt · Energieeffizienzklasse A</p>
+          <p class="price">399 €</p>
+          <button>In den Warenkorb</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300.png?text=Miele+ClassicCare" alt="Miele ClassicCare">
+        <div class="card-content">
+          <h3>Miele ClassicCare</h3>
+          <p>Geprüft & langlebig</p>
+          <p class="price">449 €</p>
+          <button>In den Warenkorb</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERSATZTEILE -->
+  <section id="teile" class="section">
+    <h2>Ersatzteile (Keine Verschleißprodukte)</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300.png?text=Bosch+Elektronikmodul" alt="Elektronikmodul">
+        <div class="card-content">
+          <h3>Elektronikmodul Bosch</h3>
+          <p>Komplett geprüft auf Funktionalität</p>
+          <p class="price">89 €</p>
+          <button>In den Warenkorb</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300.png?text=Siemens+Bedieneinheit" alt="Bedieneinheit">
+        <div class="card-content">
+          <h3>Bedieneinheit Siemens</h3>
+          <p>Generalüberholte Steuerung</p>
+          <p class="price">99 €</p>
+          <button>In den Warenkorb</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300.png?text=Miele+Trommelkreuz" alt="Trommelkreuz">
+        <div class="card-content">
+          <h3>Miele Trommelkreuz</h3>
+          <p>Geprüft & aufbereitet – lange Lebensdauer</p>
+          <p class="price">129 €</p>
+          <button>In den Warenkorb</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE -->
+  <section id="service" class="section">
+    <h2>Kundenservice</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-content">
+          <h3>Reparatur-Service</h3>
+          <p>Kostengünstige Vor-Ort und Werkstatt-Reparaturen, um Ihre Geräte zu erhalten.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Garantieverlängerung</h3>
+          <p>Bis zu 24 Monate zusätzliche Sicherheit für Ihre Maschine.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Beratung & Hotline</h3>
+          <p>Persönliche Expertenberatung bei Auswahl und Ersatzteilen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <footer id="kontakt">
+    <h3>Kontakt</h3>
+    <p>Email: kontakt@valuehugger.de | Tel: 01234 / 567890</p>
+    <p>&copy; 2025 Value Hugger – Nachhaltigkeit durch Wiederaufbereitung</p>
+  </footer>
+
+</body>
+</html>
